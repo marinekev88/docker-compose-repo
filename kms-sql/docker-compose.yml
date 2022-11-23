@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  internal_db:
+    image: mysql:8.0
+    restart: unless-stopped
+    container_name: 
+    environment: 
+      - MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - kms_internal:/var/lib/mysql
+      
+  main_db:
+    image: mysql:8.0
+    restart: unless-stopped
+    container_name: 
+    environment: 
+      - MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+    ports:
+      - 6603:3306
+    volumes:
+      - kms:/var/lib/mysql
+      
+volumes:
+  kms:
+  kms_internal:
