@@ -1,0 +1,23 @@
+version: '3'
+services:
+  bot:
+    image: whitesource/renovate:2.5.1
+    container_name: repo-bot
+    restart: unless-stopped
+    environment:
+      - ACCEPT_WHITESOURCE_TOS=y
+      - GITHUB_COM_TOKEN={GITHUB_TOKEN}
+      - LICENSE_KEY={RENOVATE_LIC_KEY}
+      - RENOVATE_ENDPOINT={GITLAB_API_ENDPOINT}
+      - RENOVATE_PLATFORM=gitlab
+      - RENOVATE_TOKEN={RENOVATE_TOKEN}
+      - WEBHOOK_SECRET={RENOVATE_SECRET_KEY}
+      - TZ=America/Phoenix
+    ports: 
+      - 9005:8080
+      
+    volumes:
+      - data:/tmp
+      
+volumes:
+  data:
