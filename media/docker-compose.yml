@@ -1,0 +1,98 @@
+version: "3.7"
+services:
+  app:
+    image: linuxserver/plex:latest
+    container_name: plex
+    environment:
+      - TZ=${TIMEZONE}
+      - UMASK=022
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEXCLAIM}
+    ports:
+      - "32400:32400"
+      - "32469:32469"
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+    volumes:
+      - ${DATADIR}/plexy-config:/config
+      - ${DATADIR}/media:/media
+    restart: unless-stopped
+    networks:
+      - mdnet
+  
+  sabnzb:
+    image: linuxserver/sabnzbd:latest
+    container_name: sabnzb
+    ports:
+      - 8080:8080
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - UMASK=002
+    volumes:
+      - ${DATADIR}/sabnzb/config:/config
+      - ${DATADIR}/downloads:/downloads
+      - ${DATADIR}/media:/plex    
+    restart: unless-stopped
+    networks:
+      - mdnet
+    
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    ports:
+      - 7878:7878
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - UMASK=002
+    volumes:
+      - ${DATADIR}/radarr-config:/config
+      - ${DATADIR}/downloads:/downloads
+      - ${DATADIR}/media/movies:/movies
+    restart: unless-stopped
+    networks:
+      - mdnet
+    
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${DATADIR}/sonarr-config:/config
+      - ${DATADIR}/downloads:/downloads
+      - ${DATADIR}/media/tv:/tv
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+    networks:
+      - mdnet    
+  
+  ombi:
+    image: ghcr.io/linuxserver/ombi:4.29.3-development
+    container_name: ombi
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Phoenix
+    volumes:
+      - ${OMBI_CONFIG}:/config
+      
+    ports:
+      - 3579:3579
+    restart: unless-stopped
+    networks:
+      - mdnet
+      
+networks:
+  mdnet:
+    driver: bridge
