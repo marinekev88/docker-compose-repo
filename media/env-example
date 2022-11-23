@@ -1,0 +1,4 @@
+DATADIR=/path/to/your/data/dir/on/host
+TIMEZONE=America/Phoenix #Or whatever city/country fits your needs
+OMBI_CONFIG=/path/to/your/ombi/configs
+PLEXCLAIM=yourPlexClaimToken
