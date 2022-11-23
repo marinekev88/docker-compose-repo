@@ -1,0 +1,78 @@
+version: "3.3"
+services:
+  webui:
+    container_name: gitlab
+    image: gitlab/gitlab-ce:15.4.3-ce.0
+    restart: unless-stopped
+    hostname: ${INSTANCE_HOSTNAME}
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${GITLAB_BASE_URL}'
+        registry_external_url '${GITLAB_REGISTRY_BASE_URL}'
+        registry_nginx['ssl_certificate'] = '${REGISTRY_SSL_CRT_PATH}'
+        registry_nginx['ssl_certificate_key'] = '${REGISTRY_SSL_KEY_PATH}'
+        puma['worker_processes'] = 0
+        sidekiq['max_concurrency'] = 10
+        prometheus_monitoring['enable'] = false
+        gitlab_rails['gitlab_shell_ssh_port'] = 2022
+        gitlab_rails['initial_root_password'] = '${GL_INIT_ROOT_PW}'
+        gitlab_rails['gitlab_email_from'] = '${GL_EMAIL_SENDER_ADDRESS'
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = '${SMTP_SENDING_SERVER}'
+        gitlab_rails['smtp_port'] = ${SMTP_PORT}
+        gitlab_rails['smtp_user_name'] = '${SMTP_USER_NAME}'
+        gitlab_rails['smtp_password'] = '${AD_PWD}'
+        gitlab_rails['smtp_domain'] = '${SMTP_DOMAIN}'
+        gitlab_rails['smtp_authentication'] = "login"
+        gitlab_rails['smtp_enable_starttls_auto'] = true
+        gitlab_rails['smtp_tls'] = true
+        gitlab_rails['ldap_enabled'] = true
+        gitlab_rails['prevent_ldap_sign_in'] = false
+        gitlab_rails['ldap_servers'] = {
+          'main' => {
+            'label' => '${AD_DOMAIN}',
+            'hosts' =>  [['${AD_DC1_HOST}', 389], ['${AD_DC2_HOST}', 389]],
+            'uid' => 'userPrincipalName',
+            'encryption' => 'plain',
+            'bind_dn' => '${AD_BIND_DN}',
+            'password' => '${AD_PWD}',
+            'timeout' => 10,
+            'active_directory' => true,
+            'allow_username_or_email_login' => false,
+            'block_auto_created_users' => false,
+            'base' => '${AD_BASE_DC_CONFIG}',
+            'user_filter' => '',
+            'lowercase_usernames' => false,
+          }
+        }
+        gitlab_rails['omniauth_enabled'] = true
+        gitlab_rails['omniauth_allow_single_sign_on'] = ['auth0']
+        gitlab_rails['omniauth_auto_link_ldap_user'] = true
+        gitlab_rails['auto_link_saml_user'] = true
+        gitlab_rails['omniauth_block_auto_created_users'] = false
+        gitlab_rails['sync_profile_attributes'] = ['name', 'email', 'location']
+        gitlab_rails['omniauth_providers'] = [
+          {
+            'name' => "auth0",
+            'args' => {
+              'client_id' => '${AUTH0_CLIENT_ID}',
+              'client_secret' => '${AUTH0_CLIENT_SECRET}',
+              'domain' => '${AUTH0_DOMAIN}',
+              'scope' => '${AUTH0_SCOPE}'
+            }          
+          }
+        ]
+    ports:
+      - "8084:80"
+      - "8443:443"
+      - "2022:22"
+      
+    volumes:
+      - gl_config:/etc/gitlab
+      - gl_logs:/var/log/gitlab
+      - gl_data:/var/opt/gitlab
+      
+volumes:
+  gl_config:
+  gl_logs:
+  gl_data:
