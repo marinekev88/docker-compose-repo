@@ -1,0 +1,24 @@
+version: "3"
+services:
+  server:
+    image: uroni/urbackup-server:2.5.x
+    container_name: kmbackup
+    restart: unless-stopped
+    environment:
+      - PGID=100
+      - PUID=1000
+      - TZ=America/Phoenix
+    ports:
+      - 55413-55415:55413-55415
+      - 35623:35623/udp
+      
+    volumes:
+      - backup_data:/backups
+      - config_data:/var/urbackup
+      - logs:/var/log
+
+volumes:
+  backup_data:
+  config_data:
+  logs:
+    
