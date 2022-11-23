@@ -1,0 +1,5 @@
+GITHUB_TOKEN=your-gh-pat
+RENOVATE_LIC_KEY=licenseKeyEmailToYou
+GITLAB_API_ENDPOINT=https://yourgitlabinstance.com/api/v4/
+RENOVATE_TOKEN=gitlab-bot-user-pat
+RENOVATE_SECRET_KEY=SomeRandomStringOfTextOrBase64Encoded
