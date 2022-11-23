@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  monitor:
+    container_name: ip-monitor
+    image: registry.kmserver.co/marinekev88/domaingetproject/monitor-beta:latest
+    environment:
+      - TZ=America/Phoenix
+    restart: unless-stopped
