@@ -3,7 +3,7 @@ services:
   internal_db:
     image: mysql:8.0
     restart: unless-stopped
-    container_name: 
+    container_name: internal-db
     environment: 
       - MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
@@ -11,10 +11,10 @@ services:
     volumes:
       - kms_internal:/var/lib/mysql
       
-  main_db:
+  helpdesk_db:
     image: mysql:8.0
     restart: unless-stopped
-    container_name: 
+    container_name: helpdesk-logger-db
     environment: 
       - MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
