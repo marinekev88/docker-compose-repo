@@ -16,7 +16,7 @@ services:
         prometheus_monitoring['enable'] = false
         gitlab_rails['gitlab_shell_ssh_port'] = 2022
         gitlab_rails['initial_root_password'] = '${GL_INIT_ROOT_PW}'
-        gitlab_rails['gitlab_email_from'] = '${GL_EMAIL_SENDER_ADDRESS'
+        gitlab_rails['gitlab_email_from'] = '${GL_EMAIL_SENDER_ADDRESS}'
         gitlab_rails['smtp_enable'] = true
         gitlab_rails['smtp_address'] = '${SMTP_SENDING_SERVER}'
         gitlab_rails['smtp_port'] = ${SMTP_PORT}
