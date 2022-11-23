@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     container_name: internal-db
     environment: 
-      - MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
       - 3306:3306
     volumes:
@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
     container_name: helpdesk-logger-db
     environment: 
-      - MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
       - 6603:3306
     volumes:
