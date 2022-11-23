@@ -1,7 +1,7 @@
-version: '3'
+version: '3.6'
 services:
   bot:
-    image: whitesource/renovate:2.5.1
+    image: whitesource/renovate:2.6.0
     container_name: repo-bot
     restart: unless-stopped
     environment:
@@ -12,7 +12,6 @@ services:
       - RENOVATE_PLATFORM=gitlab
       - RENOVATE_TOKEN={RENOVATE_TOKEN}
       - WEBHOOK_SECRET={RENOVATE_SECRET_KEY}
-      - TZ=America/Phoenix
     ports: 
       - 9005:8080
       
