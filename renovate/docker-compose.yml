@@ -12,6 +12,7 @@ services:
       - RENOVATE_PLATFORM=gitlab
       - RENOVATE_TOKEN=${RENOVATE_TOKEN}
       - WEBHOOK_SECRET=${RENOVATE_SECRET_KEY}
+      - TZ=America/Phoenix
     ports: 
       - 9005:8080
       
