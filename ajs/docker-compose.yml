@@ -1,0 +1,9 @@
+version: '3'
+services:
+  site:
+    container_name: ajs
+    image: registry.kmserver.co/marinekev88/ajs/site:latest
+    restart: unless-stopped
+    
+    ports:
+     - 8082:80
