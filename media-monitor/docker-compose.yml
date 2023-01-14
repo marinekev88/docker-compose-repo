@@ -58,9 +58,9 @@ services:
     networks:
       - monitor
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
       - {TELEGRAF_CONFIG_DIR}/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-
+      - /var/run/docker.sock:/var/run/docker.sock
+      
   varken:
     image: boerderij/varken:latest
     container_name: varken
