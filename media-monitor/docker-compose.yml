@@ -55,11 +55,11 @@ services:
     environment:
       - TZ=America/Phoenix
     pid: HOST
-    networks:
-      - monitor
     volumes:
       - {TELEGRAF_CONFIG_DIR}/telegraf.conf:/etc/telegraf/telegraf.conf
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - monitor
       
   varken:
     image: boerderij/varken:latest
