@@ -59,7 +59,7 @@ services:
       - monitor
     volumes:
       - /var/run/com.docker.vmnetd.sock:/var/run/docker.sock:ro
-      - {TELEGRAF_CONFIG_DIR}:/etc/telegraf/telegraf.conf:ro
+      - {TELEGRAF_CONFIG_DIR}/telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
   varken:
     image: boerderij/varken:latest
