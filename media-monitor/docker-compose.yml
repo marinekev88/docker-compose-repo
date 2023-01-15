@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Phoenix
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
     networks:
       - monitor
     ports:
@@ -14,9 +15,7 @@ services:
       - g_data:/var/lib/grafana
     depends_on: 
       db:
-        condition: service_started
       varken:
-        condition: service_started
   
   db:
     image: influxdb:1.8
