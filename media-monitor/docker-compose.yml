@@ -49,11 +49,13 @@ services:
   telegraf:
     image: telegraf:alpine
     container_name: telegraf
-    pid: HOST
+    user: telegraf:$(stat -c '%g' /var/run/docker.sock)
     depends_on: 
       db:
         condition: service_started
     environment:
+      - PGID=100
+      - PUID=1000
       - TZ=America/Phoenix
     volumes:
       - ${TELEGRAF_CONFIG_DIR}/telegraf.conf:/etc/telegraf/telegraf.conf
