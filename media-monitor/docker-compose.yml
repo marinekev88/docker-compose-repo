@@ -53,9 +53,8 @@ services:
       db:
         condition: service_started
     environment:
-      - PGID=1000
-      - PUID=1000
       - TZ=America/Phoenix
+    user: telegraf:999
     volumes:
       - ${TELEGRAF_CONFIG_DIR}/telegraf.conf:/etc/telegraf/telegraf.conf
       - /var/run/docker.sock:/var/run/docker.sock
