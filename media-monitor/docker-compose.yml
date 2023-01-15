@@ -14,8 +14,8 @@ services:
     volumes:
       - g_data:/var/lib/grafana
     depends_on: 
-      db:
-      varken:
+      - db
+      - varken
   
   db:
     image: influxdb:1.8
@@ -49,8 +49,7 @@ services:
     image: telegraf:alpine
     container_name: telegraf
     depends_on: 
-      db:
-        condition: service_started
+      - db
     environment:
       - TZ=America/Phoenix
       - HOST_PROC=/host/proc
@@ -125,8 +124,7 @@ services:
       - VRKN_OMBI_1_GET_ISSUE_STATUS_COUNTS=true
       - VRKN_OMBI_1_ISSUE_STATUS_RUN_SECONDS=300
     depends_on: 
-      db:
-        condition: service_started
+      - db
     networks:
       - monitor
 
