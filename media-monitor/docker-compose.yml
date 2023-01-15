@@ -49,7 +49,7 @@ services:
   telegraf:
     image: telegraf:alpine
     container_name: telegraf
-    user: telegraf:$(stat -c '%g' /var/run/docker.sock)
+    user: "telegraf:$(stat -c '%g' /var/run/docker.sock)"
     depends_on: 
       db:
         condition: service_started
