@@ -68,7 +68,7 @@ services:
       - monitor
       
   varken:
-    image: boerderij/varken:latest
+    image: boerderij/varken:develop
     container_name: varken
     volumes:
       - vark_data:/config
@@ -89,7 +89,7 @@ services:
       - VRKN_INFLUXDB_USERNAME=root
       - VRKN_INFLUXDB_PASSWORD=root
       - VRKN_TAUTULLI_1_URL=tautulli:8181
-      - VRKN_TAUTULLI_1_FALLBACK_IP=1.1.1.1
+      - VRKN_TAUTULLI_1_FALLBACK_IP=172.0.0.1
       - VRKN_TAUTULLI_1_APIKEY=${TAUT_API_KEY}
       - VRKN_TAUTULLI_1_SSL=false
       - VRKN_TAUTULLI_1_VERIFY_SSL=false
@@ -97,7 +97,7 @@ services:
       - VRKN_TAUTULLI_1_GET_ACTIVITY_RUN_SECONDS=30
       - VRKN_TAUTULLI_1_GET_STATS=true
       - VRKN_TAUTULLI_1_GET_STATS_RUN_SECONDS=3600
-      - VRKN_SONARR_1_URL=10.0.10.20:8989
+      - VRKN_SONARR_1_URL=172.0.0.1:8989
       - VRKN_SONARR_1_APIKEY=${SONARR_API_KEY}
       - VRKN_SONARR_1_SSL=false
       - VRKN_SONARR_1_VERIFY_SSL=false
@@ -107,7 +107,7 @@ services:
       - VRKN_SONARR_1_FUTURE_DAYS_RUN_SECONDS=300
       - VRKN_SONARR_1_QUEUE=true
       - VRKN_SONARR_1_QUEUE_RUN_SECONDS=300
-      - VRKN_RADARR_1_URL=10.0.10.20:7878
+      - VRKN_RADARR_1_URL=172.0.0.1:7878
       - VRKN_RADARR_1_APIKEY=${RADARR_API_KEY}
       - VRKN_RADARR_1_SSL=false
       - VRKN_RADARR_1_VERIFY_SSL=false
