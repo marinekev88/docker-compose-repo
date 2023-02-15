@@ -23,9 +23,6 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Phoenix
-    depends_on: 
-      tautulli:
-        condition: service_started
     volumes:
       - db_data:/var/lib/influxdb2
     networks:
@@ -131,6 +128,8 @@ services:
     depends_on: 
       db:
         condition: service_started
+      tautulli:
+        condition: service_healthy
     networks:
       - monitor
 
