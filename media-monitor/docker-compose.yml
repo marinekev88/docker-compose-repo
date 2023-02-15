@@ -23,6 +23,9 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Phoenix
+    depends_on: 
+      tautulli:
+        condition: service_started
     volumes:
       - db_data:/var/lib/influxdb2
     networks:
@@ -36,9 +39,6 @@ services:
     restart: unless-stopped
     volumes:
       - tau_data:/config
-    depends_on: 
-      db:
-        condition: service_started
     environment:
       - PUID=1000
       - PGID=100
