@@ -24,7 +24,7 @@ services:
     environment:
       - TZ=America/Phoenix
     volumes:
-      - db_data:/var/lib/influxdb2
+      - db_data:/var/lib/influxdb
     networks:
       - monitor
     ports:
