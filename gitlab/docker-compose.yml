@@ -46,7 +46,7 @@ services:
           }
         }
         gitlab_rails['omniauth_enabled'] = true
-        gitlab_rails['omniauth_allow_single_sign_on'] = ['auth0']
+        gitlab_rails['omniauth_allow_single_sign_on'] = ['auth0', 'azure_activedirectory_V2']
         gitlab_rails['omniauth_auto_link_ldap_user'] = true
         gitlab_rails['auto_link_saml_user'] = true
         gitlab_rails['omniauth_block_auto_created_users'] = false
@@ -60,6 +60,15 @@ services:
               'domain' => '${AUTH0_DOMAIN}',
               'scope' => '${AUTH0_SCOPE}'
             }          
+          },
+          {
+            'name' => "azure_activedirectory_V2",
+            'label' => "Azure",
+            'args' => {
+              'client_id' => '${AZURE_APP_ID}',
+              'client_secret' => '${AZURE_APP_KEY}',
+              'tenant_id' => '${AZURE_TENANT_ID}'
+            }
           }
         ]
     ports:
