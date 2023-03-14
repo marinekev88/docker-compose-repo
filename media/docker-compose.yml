@@ -20,6 +20,7 @@ services:
     volumes:
       - ${DATADIR}/plexy-config:/config
       - ${DATADIR}/media:/media
+      - ${TRANSCODE_DIR}:/transcode
     restart: unless-stopped
     networks:
       - mdnet
