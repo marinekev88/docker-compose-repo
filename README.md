@@ -27,4 +27,5 @@ ipmitool -I lanplus -H -U -P raw 0x30 0xce 0x01 0x16 0x05 0x00 0x00 0x00
 The response data is:
 
 16 05 00 00 00 05 00 01 00 00 (Disabled)
+
 16 05 00 00 00 05 00 00 00 00 (Enabled)
