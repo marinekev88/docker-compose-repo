@@ -2,7 +2,7 @@ version: "3.3"
 services:
   webui:
     container_name: gitlab
-    image: gitlab/gitlab-ce:15.8.3-ce.0
+    image: gitlab/gitlab-ce:15.10.0-ce.0
     restart: unless-stopped
     hostname: ${INSTANCE_HOSTNAME}
     environment:
@@ -46,21 +46,12 @@ services:
           }
         }
         gitlab_rails['omniauth_enabled'] = true
-        gitlab_rails['omniauth_allow_single_sign_on'] = ['auth0', 'azure_activedirectory_v2']
+        gitlab_rails['omniauth_allow_single_sign_on'] = ['azure_activedirectory_v2']
         gitlab_rails['omniauth_auto_link_ldap_user'] = true
         gitlab_rails['auto_link_saml_user'] = true
         gitlab_rails['omniauth_block_auto_created_users'] = false
         gitlab_rails['sync_profile_attributes'] = ['name', 'email', 'location']
         gitlab_rails['omniauth_providers'] = [
-          {
-            'name' => "auth0",
-            'args' => {
-              'client_id' => '${AUTH0_CLIENT_ID}',
-              'client_secret' => '${AUTH0_CLIENT_SECRET}',
-              'domain' => '${AUTH0_DOMAIN}',
-              'scope' => '${AUTH0_SCOPE}'
-            }          
-          },
           {
             'name' => "azure_activedirectory_v2",
             'label' => "Azure",
