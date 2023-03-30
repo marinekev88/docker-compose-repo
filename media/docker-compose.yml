@@ -3,6 +3,7 @@ services:
   app:
     image: linuxserver/plex:latest
     container_name: plex
+    runtime: nvidia
     environment:
       - TZ=${TIMEZONE}
       - UMASK=022
@@ -10,6 +11,7 @@ services:
       - PGID=1000
       - VERSION=docker
       - PLEX_CLAIM=${PLEXCLAIM}
+      - NVIDIA_VISIBLE_DEVICES=all
     ports:
       - "32400:32400"
       - "32469:32469"
