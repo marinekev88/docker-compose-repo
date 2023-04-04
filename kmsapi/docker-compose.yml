@@ -4,7 +4,7 @@ services:
     image: registry.kmserver.co/kms/kms/kmsapi:v1.0.9
     container_name: api
     ports:
-      - 5000:5000
+      - "5000:5000"
     restart: unless-stopped
     networks:
       - kms_net
@@ -15,8 +15,8 @@ services:
       - ACCEPT_EULA=Y
       - SEQ_FIRSTRUN_ADMINPASSWORDHASH=${PASSWD}
     ports:
-      - 8085:80
-      - 5341:5341
+      - "8085:80"
+      - "5341:5341"
     restart: unless-stopped
     volumes:
       - seq:/data
