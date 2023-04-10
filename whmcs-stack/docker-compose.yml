@@ -4,6 +4,7 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     container_name: whmcs-db
+    hostname: whmcs-mysql-server
     environment:
       MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
@@ -17,14 +18,12 @@ services:
     image: scriptingonline/whmcs:8.3.0
     container_name: kms-whmcs
     restart: unless-stopped
-    hostname: whmcs
     ports:
       - "8085:80"
     volumes:
       - whmcs-downloads:/var/www/downloads
       - whmcs-templates:/var/www/attachments
       - whmcs-templates:/var/www/templates_c
-
     networks:
       - whmcs-net
 
