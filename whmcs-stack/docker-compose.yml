@@ -1,0 +1,38 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    container_name: whmcs-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - kms_whmcs_db:/var/lib/mysql
+    networks:
+      - whmcs-net
+
+  panel:
+    image: scriptingonline/whmcs:8.3.0
+    container_name: kms-whmcs
+    restart: unless-stopped
+    hostname: whmcs
+    ports:
+      - "8085:80"
+    volumes:
+      - whmcs-downloads:/var/www/downloads
+      - whmcs-templates:/var/www/attachments
+      - whmcs-templates:/var/www/templates_c
+
+    networks:
+      - whmcs-net
+
+volumes:
+  whmcs-downloads:
+  whmcs-templates:
+  whmcs-attachments:
+
+networks:
+  whmcs-net:
+    driver: bridge

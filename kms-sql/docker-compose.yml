@@ -26,27 +26,9 @@ services:
     networks:
       - sql-net
 
-  panel:
-    image: scriptingonline/whmcs:8.3.0
-    container_name: kms-whmcs
-    restart: unless-stopped
-    hostname: whmcs.xpro.dev
-    ports:
-      - "8085:80"
-    volumes:
-      - whmcs-downloads:/var/www/downloads
-      - whmcs-templates:/var/www/attachments
-      - whmcs-templates:/var/www/templates_c
-
-    networks:
-      - sql-net
-
 volumes:
   kms:
   kms_internal:
-  whmcs-downloads:
-  whmcs-templates:
-  whmcs-attachments:
 
 networks:
   sql-net:
