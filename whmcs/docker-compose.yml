@@ -12,6 +12,9 @@ services:
       - whmcs-templates:/var/www/attachments
       - whmcs-templates:/var/www/templates_c
 
+    networks:
+      - sql-default
+
 volumes:
   whmcs-downloads:
   whmcs-templates:
