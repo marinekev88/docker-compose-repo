@@ -7,10 +7,12 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - kms_internal:/var/lib/mysql
-      
+    networks:
+      - sql-net
+
   helpdesk_db:
     image: mysql:8.0
     restart: unless-stopped
@@ -18,10 +20,34 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
-      - 6603:3306
+      - "6603:3306"
     volumes:
       - kms:/var/lib/mysql
-      
+    networks:
+      - sql-net
+
+  panel:
+    image: scriptingonline/whmcs:8.3.0
+    container_name: kms-whmcs
+    restart: unless-stopped
+    hostname: whmcs.xpro.dev
+    ports:
+      - "8085:80"
+    volumes:
+      - whmcs-downloads:/var/www/downloads
+      - whmcs-templates:/var/www/attachments
+      - whmcs-templates:/var/www/templates_c
+
+    networks:
+      - sql-net
+
 volumes:
   kms:
   kms_internal:
+  whmcs-downloads:
+  whmcs-templates:
+  whmcs-attachments:
+
+networks:
+  sql-net:
+    driver: bridge
