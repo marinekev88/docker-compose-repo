@@ -9,7 +9,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - kms_whmcs_db:/var/lib/mysql
+      - whmcs-db:/var/lib/mysql
     networks:
       - whmcs-net
 
@@ -29,6 +29,7 @@ services:
       - whmcs-net
 
 volumes:
+  whmcs-db:
   whmcs-downloads:
   whmcs-templates:
   whmcs-attachments:
