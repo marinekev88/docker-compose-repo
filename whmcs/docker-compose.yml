@@ -4,7 +4,7 @@ services:
     image: scriptingonline/whmcs:8.3.0
     container_name: kms-whmcs
     restart: unless-stopped
-
+    hostname: whmcs.xpro.dev
     ports:
       - "8085:80"
     volumes:
