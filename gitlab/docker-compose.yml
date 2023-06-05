@@ -24,7 +24,7 @@ services:
         gitlab_rails['smtp_password'] = '${AD_PWD}'
         gitlab_rails['smtp_domain'] = '${SMTP_DOMAIN}'
         gitlab_rails['smtp_authentication'] = "login"
-        gitlab_rails['smtp_enable_starttls_auto'] = true
+        gitlab_rails['smtp_enable_starttls_auto'] = false
         gitlab_rails['smtp_tls'] = true
         gitlab_rails['ldap_enabled'] = true
         gitlab_rails['prevent_ldap_sign_in'] = false
