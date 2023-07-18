@@ -88,12 +88,12 @@ services:
       - mdnet    
   
   ombi:
-    image: ghcr.io/linuxserver/ombi:4.41.1-development
+    image: ghcr.io/linuxserver/ombi:4.43.1-development
     container_name: ombi
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Phoenix
+      - TZ=${TIMEZONE}
     volumes:
       - ${OMBI_CONFIG}:/config
       
