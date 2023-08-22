@@ -31,7 +31,7 @@ services:
         gitlab_rails['ldap_servers'] = {
           'main' => {
             'label' => '${AD_DOMAIN}',
-            'hosts' =>  [['${AD_DC1_HOST}', 389], ['${AD_DC2_HOST}', 389]],
+            'hosts' =>  [['${AD_PROXY}', 389]],
             'uid' => 'userPrincipalName',
             'encryption' => 'plain',
             'bind_dn' => '${AD_BIND_DN}',
