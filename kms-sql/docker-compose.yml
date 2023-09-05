@@ -13,21 +13,7 @@ services:
     networks:
       - sql-net
 
-  helpdesk_db:
-    image: mysql:8.0
-    restart: unless-stopped
-    container_name: helpdesk-logger-db
-    environment: 
-      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
-    ports:
-      - "6603:3306"
-    volumes:
-      - kms:/var/lib/mysql
-    networks:
-      - sql-net
-
 volumes:
-  kms:
   kms_internal:
 
 networks:
