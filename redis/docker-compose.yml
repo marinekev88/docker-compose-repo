@@ -5,7 +5,7 @@ services:
     container_name: "redis_1"
     restart: unless-stopped
     environment:
-      - TZ=America/Phoenix
+      - TZ=America/New_York
       - PUID=1000
       - PGID=100
     ports:
