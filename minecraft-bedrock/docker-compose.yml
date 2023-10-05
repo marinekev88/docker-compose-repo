@@ -5,9 +5,6 @@ services:
     container_name: minecraft
     image: itzg/minecraft-bedrock-server
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
       - EULA="TRUE"
       - GAMEMODE=creative
       - DIFFICULTY= normal
