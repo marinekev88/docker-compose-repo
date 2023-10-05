@@ -5,13 +5,15 @@ services:
     container_name: minecraft
     image: itzg/minecraft-bedrock-server
     environment:
-      - EULA="TRUE"
-      - GAMEMODE=creative
-      - DIFFICULTY= normal
-      - SERVER_NAME="KMS MC"
-      - MAX_PLAYERS=100
-      - LEVEL_TYPE=amplified
-      - PLAYER_IDLE_TIMEOUT=60
+      UID: 1000
+      GID: 1000
+      EULA: "TRUE"
+      GAMEMODE: creative
+      DIFFICULTY: normal
+      SERVER_NAME: "KMS MC"
+      MAX_PLAYERS: 100
+      LEVEL_TYPE: amplified
+      PLAYER_IDLE_TIMEOUT: 60
     ports:
       - "19132:19132/udp"
     volumes:
