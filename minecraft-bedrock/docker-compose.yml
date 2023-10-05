@@ -10,7 +10,6 @@ services:
       DIFFICULTY: normal
       SERVER_NAME: "KMS MC"
       MAX_PLAYERS: 100
-      LEVEL_TYPE: amplified
       PLAYER_IDLE_TIMEOUT: 60
     ports:
       - "19132:19132/udp"
