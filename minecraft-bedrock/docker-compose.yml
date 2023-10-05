@@ -5,8 +5,6 @@ services:
     container_name: minecraft
     image: itzg/minecraft-bedrock-server
     environment:
-      UID: 1000
-      GID: 1000
       EULA: "TRUE"
       GAMEMODE: creative
       DIFFICULTY: normal
@@ -17,9 +15,6 @@ services:
     ports:
       - "19132:19132/udp"
     volumes:
-      - data:/data
+      - /mc/data:/data
     stdin_open: true
     tty: true
-    
-volumes:
-  data:
