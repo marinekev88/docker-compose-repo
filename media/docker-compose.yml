@@ -88,7 +88,7 @@ services:
       - mdnet    
   
   ombi:
-    image: ghcr.io/linuxserver/ombi:4.43.4-development
+    image: ghcr.io/linuxserver/ombi:4.43.5
     container_name: ombi
     environment:
       - PUID=1000
