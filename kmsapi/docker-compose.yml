@@ -1,8 +1,12 @@
 version: "3.8"
 services:      
   api:
-    image: registry.kmserver.co/kms/kms/kmsapi:v1.0.10
+    image: ghcr.io/kmdeveloping/kms-api:v1.0.11
     container_name: api
+    environment:
+      - AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
+      - AZURE_TENANT_ID=${AZURE_TENANT_ID}
+      - AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
     ports:
       - "5000:5000"
     restart: unless-stopped
