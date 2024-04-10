@@ -1,24 +1,18 @@
 version: "3.7"
 services:
   app:
-    image: lscr.io/linuxserver/plex:latest
+    image: lscr.io/linuxserver/plex:1.40.1.8227-c0dd5a73e-ls210
     container_name: plex
     #Enable the below options for Nvidia GPU discovery
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
+    runtime: nvidia
     environment:
       - TZ=${TIMEZONE}
       - UMASK=022
       - PUID=1000
       - PGID=1000
       - VERSION=docker
-      - PLEX_CLAIM=${PLEXCLAIM}
       #Enable the below options for Nvidia GPU discovery
       - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
     ports:
       - "32400:32400"
       - "32469:32469"
