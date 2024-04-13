@@ -21,8 +21,8 @@ services:
       - "32413:32413/udp"
       - "32414:32414/udp"
     volumes:
-      - ${DATADIR}/plexy-config:/config
-      - ${DATADIR}/media:/media
+      - ${DATADIR}/plex-config:/config
+      - ${DATADIR}/plex:/media
       - ${TRANSCODE_DIR}:/transcode
     restart: unless-stopped
     networks:
@@ -41,7 +41,7 @@ services:
     volumes:
       - ${DATADIR}/sabnzb/config:/config
       - ${DATADIR}/downloads:/downloads
-      - ${DATADIR}/media:/plex    
+      - ${DATADIR}/plex:/plex    
     restart: unless-stopped
     networks:
       - mdnet
@@ -59,7 +59,7 @@ services:
     volumes:
       - ${DATADIR}/radarr-config:/config
       - ${DATADIR}/downloads:/downloads
-      - ${DATADIR}/media/movies:/movies
+      - ${DATADIR}/plex/movies:/movies
     restart: unless-stopped
     networks:
       - mdnet
@@ -74,7 +74,7 @@ services:
     volumes:
       - ${DATADIR}/sonarr-config:/config
       - ${DATADIR}/downloads:/downloads
-      - ${DATADIR}/media/tv:/tv
+      - ${DATADIR}/plex/tv:/tv
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -90,7 +90,6 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${OMBI_CONFIG}:/config
-      
     ports:
       - "3579:3579"
     restart: unless-stopped
