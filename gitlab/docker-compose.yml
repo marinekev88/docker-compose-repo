@@ -12,7 +12,6 @@ services:
         registry_nginx['ssl_certificate'] = '${REGISTRY_SSL_CRT_PATH}'
         registry_nginx['ssl_certificate_key'] = '${REGISTRY_SSL_KEY_PATH}'
         puma['worker_processes'] = 0
-        sidekiq['max_concurrency'] = 10
         prometheus_monitoring['enable'] = false
         gitlab_rails['gitlab_shell_ssh_port'] = 2022
         gitlab_rails['initial_root_password'] = '${GL_INIT_ROOT_PW}'
