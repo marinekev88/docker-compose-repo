@@ -9,6 +9,8 @@ services:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
+    devices:
+      - /dev/dri:/dev/dri
     ports:
       - "32400:32400"
       - "32469:32469"
