@@ -1,4 +1,5 @@
 DATADIR=/path/to/your/data/dir/on/host
-TIMEZONE=America/Phoenix #Or whatever city/country fits your needs
+TRANSCODE_DIR=/path/to/transcoding/directory
 OMBI_CONFIG=/path/to/your/ombi/configs
 PLEXCLAIM=yourPlexClaimToken
+TIMEZONE=America/New_York #Or whatever city/country fits your needs
