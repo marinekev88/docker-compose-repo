@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  app:
+  plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
     environment:
@@ -24,7 +24,7 @@ services:
       - ${TRANSCODE_DIR}:/transcode
     restart: unless-stopped
     networks:
-      - mdnet
+      - media_net
   
   sabnzb:
     image: lscr.io/linuxserver/sabnzbd:latest
@@ -42,7 +42,7 @@ services:
       - ${DATADIR}/plex:/plex    
     restart: unless-stopped
     networks:
-      - mdnet
+      - media_net
     
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -60,7 +60,7 @@ services:
       - ${DATADIR}/plex/movies:/movies
     restart: unless-stopped
     networks:
-      - mdnet
+      - media_net
     
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -77,7 +77,7 @@ services:
       - "8989:8989"
     restart: unless-stopped
     networks:
-      - mdnet    
+      - media_net    
   
   ombi:
     image: lscr.io/linuxserver/ombi:latest
@@ -91,8 +91,20 @@ services:
     ports:
       - "3579:3579"
     restart: unless-stopped
+    depends_on:
+      - "mysql_db"
     networks:
-      - mdnet
+      - media_net
+
+  mysql_db:
+    image: mysql:latest
+    container_name: db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - $(OMBI_CONFIG)/db:/var/lib/mysql
+      - ${OMBI_CONFIG}/db_init/init.sql:/docker-entrypoint-initdb.d/1.sql
       
 networks:
   mdnet:
