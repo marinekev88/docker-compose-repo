@@ -1,5 +1,5 @@
-DATADIR=/path/to/your/data/dir/on/host
+MEDIA_DIR=/path/to/your/data/dir/on/host
 TRANSCODE_DIR=/path/to/transcoding/directory
-OMBI_CONFIG=/path/to/your/ombi/configs
-PLEXCLAIM=yourPlexClaimToken
-TIMEZONE=America/New_York #Or whatever city/country fits your needs
+CONFIGURATION_DIR=/path/to/your/ombi/configs
+PLEX_CLAIM_TOKEN=yourPlexClaimToken
+TIME_ZONE=America/New_York #Or whatever city/country fits your needs

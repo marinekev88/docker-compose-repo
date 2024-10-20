@@ -1,16 +1,24 @@
-version: "3.7"
+version: "3.8"
 services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     environment:
-      - TZ=${TIMEZONE}
+      - TZ=${TIME_ZONE}
       - UMASK=022
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - VERSION=docker
-    devices:
-      - /dev/dri:/dev/dri
+      - PLEX_CLAIM=${PLEX_CLAIM_TOKEN}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=comput,video,utility
     ports:
       - "32400:32400"
       - "32469:32469"
@@ -19,8 +27,8 @@ services:
       - "32413:32413/udp"
       - "32414:32414/udp"
     volumes:
-      - ${DATADIR}/plex-config:/config
-      - ${DATADIR}/plex:/media
+      - ${CONFIGURATION_DIR}/plex-config:/config
+      - ${MEDIA_DIR}/plex:/media
       - ${TRANSCODE_DIR}:/transcode
     restart: unless-stopped
     networks:
@@ -32,14 +40,14 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
+      - PUID=1001
+      - PGID=1001
+      - TZ=${TIME_ZONE}
       - UMASK=002
     volumes:
-      - ${DATADIR}/sabnzb/config:/config
-      - ${DATADIR}/downloads:/downloads
-      - ${DATADIR}/plex:/plex    
+      - ${CONFIGURATION_DIR}/sabnzb-config:/config
+      - ${MEDIA_DIR}/downloads:/downloads
+      - ${MEDIA_DIR}/plex:/plex    
     restart: unless-stopped
     networks:
       - media_net
@@ -50,14 +58,14 @@ services:
     ports:
       - "7878:7878"
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
+      - PUID=1001
+      - PGID=1001
+      - TZ=${TIME_ZONE}
       - UMASK=002
     volumes:
-      - ${DATADIR}/radarr-config:/config
-      - ${DATADIR}/downloads:/downloads
-      - ${DATADIR}/plex/movies:/movies
+      - ${CONFIGURATION_DIR}/radarr-config:/config
+      - ${MEDIA_DIR}/downloads:/downloads
+      - ${MEDIA_DIR}/plex/movies:/movies
     restart: unless-stopped
     networks:
       - media_net
@@ -66,13 +74,13 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
+      - PUID=1001
+      - PGID=1001
+      - TZ=${TIME_ZONE}
     volumes:
-      - ${DATADIR}/sonarr-config:/config
-      - ${DATADIR}/downloads:/downloads
-      - ${DATADIR}/plex/tv:/tv
+      - ${CONFIGURATION_DIR}/sonarr-config:/config
+      - ${MEDIA_DIR}/downloads:/downloads
+      - ${MEDIA_DIR}/plex/tv:/tv
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -83,11 +91,11 @@ services:
     image: lscr.io/linuxserver/ombi:latest
     container_name: ombi
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
+      - PUID=1001
+      - PGID=1001
+      - TZ=${TIME_ZONE}
     volumes:
-      - ${OMBI_CONFIG}:/config
+      - ${CONFIGURATION_DIR}/ombi-config:/config
     ports:
       - "3579:3579"
     restart: unless-stopped
@@ -103,8 +111,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - $(OMBI_CONFIG)/db:/var/lib/mysql
-      - ${OMBI_CONFIG}/db_init/init.sql:/docker-entrypoint-initdb.d/1.sql
+      - $(CONFIGURATION_DIR)/sql-config/db:/var/lib/mysql
+      - ${CONFIGURATION_DIR}/sql-config/init.sql:/docker-entrypoint-initdb.d/1.sql
       
 networks:
   mdnet:
