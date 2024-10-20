@@ -111,7 +111,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - sql-media:/var/lib/mysql
-      - ${CONFIGURATION_DIR}/sql-config/init.sql:/docker-entrypoint-initdb.d/1.sql
+      - ${CONFIGURATION_DIR}/sql-config/00-init-db.sql:/docker-entrypoint-initdb.d/00-init-db.sql
     networks:
       - media_net
       
