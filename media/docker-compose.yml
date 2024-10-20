@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   plex:
     image: lscr.io/linuxserver/plex:latest
@@ -113,7 +112,9 @@ services:
     volumes:
       - $(CONFIGURATION_DIR)/sql-config/db:/var/lib/mysql
       - ${CONFIGURATION_DIR}/sql-config/init.sql:/docker-entrypoint-initdb.d/1.sql
+    networks:
+      - media_net
       
 networks:
-  mdnet:
+  media_net:
     driver: bridge
