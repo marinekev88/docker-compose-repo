@@ -104,7 +104,7 @@ services:
       - media_net
 
   mysql_db:
-    image: mysql:latest
+    image: mysql:8
     container_name: db
     restart: unless-stopped
     environment:
