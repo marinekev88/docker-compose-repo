@@ -47,7 +47,8 @@ services:
     volumes:
       - ${CONFIGURATION_DIR}/sabnzb-config:/config
       - ${MEDIA_DIR}/downloads:/downloads
-      - ${MEDIA_DIR}/plex:/plex    
+      - ${MEDIA_DIR}/plex:/plex
+      - ${MEDIA_DIR}/incomplete:/incomplete
     restart: unless-stopped
     networks:
       - media_net
