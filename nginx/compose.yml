@@ -11,7 +11,7 @@ services:
       DB_MYSQL_PORT: 3306
       DB_MYSQL_USER: ${MYSQL_SAU_USER}
       DB_MYSQL_PASSWORD: ${MYSQL_SAU_USER_PASSWD}
-      DB_MYSQL_NAME: "proxy_manager"
+      DB_MYSQL_NAME: ${MYSQL_DATABASE}
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWD}
-      MYSQL_DATABASE: "proxy_manager"
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_SAU_USER}
       MYSQL_PASSWORD: ${MYSQL_SAU_USER_PASSWD}
       MARIADB_AUTO_UPGRADE: '1'
