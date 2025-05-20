@@ -14,7 +14,7 @@ services:
             - capabilities: [gpu]
 
   open_webui:
-    image: ghcr.io/ollama/open-webui
+    image: ghcr.io/open-webui/open-webui:cuda
     container_name: open_webui
     restart: unless-stopped
     ports:
