@@ -11,10 +11,12 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   open_webui:
-    image: ghcr.io/ollama/open-webui
+    image: ghcr.io/ollama/open-webui:cuda
     container_name: open_webui
     restart: unless-stopped
     ports:
@@ -29,7 +31,9 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
 volumes:
   ollama_data:
