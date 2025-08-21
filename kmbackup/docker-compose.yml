@@ -1,7 +1,7 @@
 version: "3"
 services:
   server:
-    image: uroni/urbackup-server:2.5.x
+    image: uroni/urbackup-server:latest
     container_name: kmbackup
     restart: unless-stopped
     environment:
