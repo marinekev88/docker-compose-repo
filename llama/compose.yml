@@ -16,4 +16,4 @@ services:
               capabilities: [gpu]
 
 volumes:
-  ollama_mocel_data:
+  ollama_model_data:
