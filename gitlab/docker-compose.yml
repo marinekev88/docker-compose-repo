@@ -2,7 +2,7 @@ version: "3.3"
 services:
   webui:
     container_name: gitlab
-    image: gitlab/gitlab-ee:17.11.2-ee.0
+    image: gitlab/gitlab-ee:18.0.0-ee.0
     restart: unless-stopped
     hostname: ${INSTANCE_HOSTNAME}
     environment:
