@@ -7,6 +7,7 @@ services:
       - "11434:11434"
     volumes:
       - ollama_model_data:/root/.ollama
+      - ${MODELFILES_DIRECTORY}:/root/.custom_models
     deploy:
       resources:
         reservations:
