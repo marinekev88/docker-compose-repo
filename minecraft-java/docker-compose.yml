@@ -1,9 +1,11 @@
 version: '3.8'
 
 services:
-  mcj:
-    container_name: minecraft
+  mcjv:
+    container_name: minecraft-java
     image: itzg/minecraft-server
+    stdin_open: true
+    tty: true
     environment:
       EULA: "true"
       TYPE: "PAPER"
@@ -13,15 +15,14 @@ services:
         https://dev.bukkit.org/projects/multiverse-core/files/latest
       GAMEMODE: creative
       DIFFICULTY: normal
-      SERVER_NAME: "KMS MC"
-      MAX_PLAYERS: 100
-      PLAYER_IDLE_TIMEOUT: 60
+      SERVER_NAME: "KMS MC JAVA"
+      MAX_PLAYERS: ${MAX_PLAYES:-100}
+      PLAYER_IDLE_TIMEOUT: ${IDLE_TIMEOUT:-60}
     ports:
       - "25565:25565"
       - "19132:19132/udp"
     volumes:
       - data:/data
-    stdin_open: true
-    tty: true
+    
 volumes:
   data:
