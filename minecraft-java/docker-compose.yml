@@ -10,7 +10,7 @@ services:
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
-        https://dev.bukkit.org/projects/multiverse-core/files/latest
+        https://hangarcdn.papermc.io/plugins/Multiverse/Multiverse-Core/versions/5.5.1/PAPER/multiverse-core-5.5.1.jar
       GAMEMODE: creative
       DIFFICULTY: normal
       SERVER_NAME: "KMS MC JAVA"
