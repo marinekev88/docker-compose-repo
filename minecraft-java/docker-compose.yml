@@ -5,17 +5,19 @@ services:
     stdin_open: true
     tty: true
     environment:
-      EULA: "true"
+      EULA: "TRUE"
+      MAX_PLAYERS: ${MAX_PLAYES:-100}
+      PLAYER_IDLE_TIMEOUT: ${IDLE_TIMEOUT:-60}
       TYPE: "PAPER"
+      MEMORY: "3072M"
+      DIFFICULTY: "${DIFFICULTY:-2}"
+      MODE: "${GAME_MODE:-1}"
+      ENABLE_COMMAND_BLOCK: "TRUE"
+      ALLOW_FLIGHT: "TRUE"
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
         https://hangarcdn.papermc.io/plugins/Multiverse/Multiverse-Core/versions/5.5.1/PAPER/multiverse-core-5.5.1.jar
-      GAMEMODE: creative
-      DIFFICULTY: normal
-      SERVER_NAME: "KMS MC JAVA"
-      MAX_PLAYERS: ${MAX_PLAYES:-100}
-      PLAYER_IDLE_TIMEOUT: ${IDLE_TIMEOUT:-60}
     ports:
       - "25565:25565"
       - "19132:19132/udp"
